@@ -111,6 +111,7 @@ def manual_ssl_config
     # openbsd and linux:
     :crypto_hack => [%w[crypto ssl crypto], %w[openssl/ssl.h openssl/err.h]],
     :mswin => [%w[ssleay32 libeay32], %w[openssl/ssl.h openssl/err.h]],
+    :mingw => [%w[crypto ssl], %w[openssl/ssl.h openssl/err.h]],
   }
 
   dc_flags = ['ssl']
@@ -118,7 +119,7 @@ def manual_ssl_config
 
   libs, heads = case RUBY_PLATFORM
   when /mswin/    ; ssl_libs_heads_args[:mswin]
-  when /mingw/    ; ssl_libs_heads_args[:unix]
+  when /mingw/    ; ssl_libs_heads_args[:mingw]
   when /darwin/   ; ssl_libs_heads_args[:darwin]
   when /openbsd/  ; ssl_libs_heads_args[:crypto_hack]
   when /linux/    ; ssl_libs_heads_args[:crypto_hack]
